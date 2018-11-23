@@ -1,0 +1,51 @@
+<div>
+    <table class="table table-bordered table-striped">
+      <thead><tr>
+          <th>Order Id</th>
+          <th>Customer Name</th>
+          <th>Sub Total</th>
+          <th>Ordered On</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody *ngFor = "let order of orderHistory" >
+        <tr >
+          <td>{{order.OrderId}}</td>
+          <td>{{order.CustomerName}}</td>
+          <td>{{order.TotalPrice}}</td>
+          <td>{{order.Date}}</td>
+          <td><button class="btn btn-info" (click) = displayFoodDetails(order)>View</button></td>
+        </tr>
+        <tr>
+          <td colspan="5">
+              <table class = "table table-bordered table table-striped" *ngIf= order.ShowOrNot>
+              
+                  <thead>
+                    <tr>
+                    <th> FoodId</th>
+                    <th> FoodItem</th>
+                    <th> Price</th>
+                    <th> Qty</th>
+                    <th> Net Price</th>
+                  </tr>
+                  </thead>
+                  <tbody *ngFor = "let food of order.Foods" >
+                    <tr >
+                      <td>{{food.FoodId}}</td>
+                      <td>{{food.FoodItem}}</td>
+                      <td>{{food.Price}}</td>
+                      <td>{{food.Quantity}}</td>
+                      <td>{{food.Price*food.Quantity}}</td>
+
+                    </tr>
+                  </tbody>
+                </table>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+
+     
+
+</div>

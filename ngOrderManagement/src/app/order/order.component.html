@@ -1,0 +1,40 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-5">
+        <label>Enter your Name:</label>
+        <input type="text" class="form-control input-sm" [(ngModel)]=cart.CustomerName name="name"/>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-8 row"> 
+      <div class="col-3 border rounded p-5 m-1" style = "background-color: white" *ngFor = "let food of foods">
+        <h4  style="color : black">{{food.FoodItem}}</h4>
+        <h6 class="text-success">₹ {{food.Price}}</h6>
+        
+        <button class="btn btn-outline-success" (click) = addToCart(food) ><img src="../../assets/shopping-cart-304843__340.png" style="width :30px; height :30px"/></button> 
+      </div>
+    </div>
+    <div class="col p-2">
+      <h1 class="text-primary">Cart</h1>
+      <div class="jumbotron" *ngIf = showMessageDiv>
+        <button type="button" class="close text-danger" (click)= closeMessageDiv()>&times; </button>
+        {{message}}
+      </div>
+      <div class="p-3 m-1 border rounded" *ngFor = "let food of cart.Foods">
+        <button type="button" class="close text-danger" (click)= "removeFoodFromCart(food)">&times; </button>
+        <h4 class="text-primary">{{food.FoodItem}}</h4>
+        <div class="text-success">Unit Price ₹ {{food.Price}}</div>
+        <div class=" m-3 row">
+          <button type="button" class="col-1 m-1 btn btn-outline-primary" (click) = reduceQuantity(food)>-</button>
+          <button type="button" class="col-1 m-1 btn btn-outline-default text-primary" disabled>{{food.Quantity}}</button>
+          <button type="button" class="col-1 m-1 btn btn-outline-primary" (click) = addQuantity(food)>+</button>
+        </div>
+        <h6 class="text-success">Total Price ₹ {{food.Quantity * food.Price}}</h6>
+      </div>
+      <h3 class="text-success m-3 p-3">
+        Subtotal : {{cart.TotalPrice}}
+      </h3>
+      <button class="btn btn-outline-success btn-lg" (click) = placeOrder() >Place Order</button>
+    </div>
+  </div>
+</div>
